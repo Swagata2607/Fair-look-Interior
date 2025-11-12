@@ -8,125 +8,100 @@
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3079/3079170.png" />
   
   <script src="https://cdn.tailwindcss.com"></script>
-  
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            'custom-pink': '#e95a63', /* Primary CTA Color */
-            'custom-pink-hover': '#cf4c54', 
-            'custom-dark': '#222222', /* Dark text/background contrast */
-            'custom-highlight': '#FFD700', /* Gold/Yellow highlight */
-            'custom-light-bg': '#f8f8f8', /* Light background */
+            'custom-pink': '#C6A664',
+            'custom-pink-hover': '#cf4c54',
+            'custom-dark': '#222222',
+            'custom-highlight': '#FFD700',
+            'custom-light-bg': '#F8F6F1',
           },
         }
       }
     }
   </script>
-  
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
   <style>
-    /* Styles needed that cannot be fully expressed with Tailwind CDN */
     body {
       font-family: 'Poppins', sans-serif;
       overflow-x: hidden;
       margin: 0;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      background-color: #f8f8f8; /* Base color for the whole page */
+      background-color: #f8f8f8;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Fixed Navbar */
     .navbar {
-        backdrop-filter: blur(6px);
-        background: rgba(255,255,255,0.98);
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      backdrop-filter: blur(6px);
+      background: rgba(248, 246, 241, 1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    
-    /* Mobile dropdown */
+
     .dropdown { display: none; }
     .dropdown.show { display: block; }
-    
-    /* Carousel Item Styling */
-    .carousel-item {
-        position: absolute;
-        inset: 0;
-        background-size: cover;
-        background-position: center;
-        opacity: 0;
-        transition: opacity 2s ease-in-out; 
-        z-index: 0;
-        filter: brightness(0.9);
-    }
-    .carousel-item.active {
-        opacity: 0.2; 
-    }
-    
-    /* Fixed icons bottom-right */
-    .fixed-icons {
-      position: fixed;
-      right: 25px;
-      bottom: 25px;
-      z-index: 50;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .fixed-icons a {
-      background: #25D366;
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-      text-decoration: none;
-    }
-    .fixed-icons a.call { background: #5B8A8A; }
-    .fixed-icons a:hover { transform: scale(1.08); box-shadow: 0 8px 22px rgba(0,0,0,0.28); }
 
-    /* Project Card Image Hover Effect */
+    .carousel-item {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+      z-index: 0;
+      filter: brightness(1.1);
+    }
+    .carousel-item.active { opacity: 1; }
+
     .proj img {
       transition: transform .4s ease, filter .4s ease;
       border-radius: 8px;
-      display: block;
     }
     .proj:hover img {
       transform: scale(1.05);
       filter: brightness(1.08);
     }
-    
-    /* Mobile adjustments */
+
     @media (max-width: 640px) {
-      .hero-content { padding: 3rem 1rem; min-height: 70vh; }
-      .hero-buttons {
-          flex-direction: column;
-          gap: 12px;
-      }
+      .hero-content { padding: 3rem 1rem; min-height: 70vh; text-align: center; }
+      .hero-buttons { flex-direction: column; gap: 12px; justify-content: center; }
+    }
+
+    .hero-content h2, .hero-content p, .hero-content span {
+      text-shadow: 0 4px 14px rgba(0,0,0,0.45);
     }
   </style>
 </head>
 <body>
 
+  <!-- Navbar -->
   <nav class="navbar fixed top-0 w-full z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
       <h1 class="text-2xl font-serif font-bold text-custom-dark">Fair & Look Interior</h1>
-      <ul class="hidden md:flex space-x-8 text-custom-dark font-medium">
-        <li><a href="#home" class="hover:text-custom-pink transition-colors">Home</a></li>
-        <li><a href="#projects" class="hover:text-custom-pink transition-colors">Projects</a></li>
-        <li><a href="#about" class="hover:text-custom-pink transition-colors">About</a></li>
-        <li><a href="#contact-form" class="hover:text-custom-pink transition-colors">Quote</a></li>
-      </ul>
-      <div class="md:hidden">
-        <button id="menuBtn" class="text-2xl text-custom-dark hover:text-custom-pink transition-colors" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+      <div class="flex items-center space-x-6">
+        <ul class="hidden md:flex space-x-8 text-custom-dark font-medium">
+          <li><a href="#home" class="hover:text-custom-pink transition-colors">Home</a></li>
+          <li><a href="#projects" class="hover:text-custom-pink transition-colors">Projects</a></li>
+          <li><a href="#about" class="hover:text-custom-pink transition-colors">About</a></li>
+          <li><a href="#contact-form" class="hover:text-custom-pink transition-colors">Quote</a></li>
+        </ul>
+
+        <a href="https://wa.me/9083578093" target="_blank" aria-label="WhatsApp chat" class="text-[#25D366] text-3xl hover:text-[#1e9b4e] transition-colors">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+
+        <div class="md:hidden">
+          <button id="menuBtn" class="text-2xl text-custom-dark hover:text-custom-pink transition-colors" aria-label="Toggle menu"><i class="fa-solid fa-bars"></i></button>
+        </div>
       </div>
     </div>
+
     <div id="menuDropdown" class="dropdown bg-white md:hidden px-6 py-3 shadow-md">
       <a href="#home" class="block py-2 text-custom-dark hover:text-custom-pink">Home</a>
       <a href="#projects" class="block py-2 text-custom-dark hover:text-custom-pink">Projects</a>
@@ -135,182 +110,178 @@
     </div>
   </nav>
 
-  <div class="pt-16 min-h-screen bg-custom-light-bg text-custom-dark">
+  <!-- Hero Section (centered) -->
+  <section id="home" class="relative overflow-hidden min-h-[95vh] flex items-center justify-center fade-section bg-custom-dark text-white text-center">
+    <div id="carouselBackground" aria-hidden="true">
+      <div class="carousel-item active filter blur-sm brightness-75" style="background-image: url('https://images.pexels.com/photos/5824519/pexels-photo-5824519.jpeg');"></div>
+      <div class="carousel-item filter blur-sm brightness-75" style="background-image: url('https://images.pexels.com/photos/164005/pexels-photo-164005.jpeg');"></div>
+      <div class="carousel-item filter blur-sm brightness-75" style="background-image: url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg');"></div>
+    </div>
 
-    <section id="home" class="relative overflow-hidden min-h-[90vh] flex items-center justify-center fade-section bg-custom-dark">
-      
-      <div id="carouselBackground">
-          <div class="carousel-item active" style="background-image: url('https://images.pexels.com/photos/5824519/pexels-photo-5824519.jpeg')"></div>
-          <div class="carousel-item" style="background-image: url('https://images.pexels.com/photos/164005/pexels-photo-164005.jpeg')"></div>
-          <div class="carousel-item" style="background-image: url('https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg')"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20 z-[1]"></div>
+
+    <div class="relative z-10 max-w-4xl p-10 md:p-16 hero-content flex flex-col items-center justify-center text-center">
+      <p class="text-sm md:text-base uppercase tracking-widest font-semibold text-gray-300 mb-2">— Fair & Look Interior —</p>
+
+      <h2 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight drop-shadow-lg">
+        Luxury Meets <span class="text-custom-pink">Comfort</span>
+      </h2>
+
+      <p class="text-base md:text-lg text-gray-200 mb-8 font-light max-w-2xl">
+        Honest pricing and quality design to bring your dream space to life.
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-5 hero-buttons">
+        <a href="#contact-form" class="w-full sm:w-64 py-3 px-6 rounded-full bg-custom-pink text-white text-base font-bold uppercase shadow-2xl shadow-custom-pink/50 hover:bg-custom-pink-hover transition-all duration-300 transform hover:scale-[1.05]">
+          Book a Free Consult
+        </a>
+          <a href="#projects" class="w-full sm:w-64 py-3 px-6 rounded-full border-2 border-white/50 text-white text-base font-medium hover:bg-white/20 transition-all duration-300 transform hover:scale-[1.05]">
+
+
+          View Portfolio
+        </a>
       </div>
-      
-      <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/0 z-[1]"></div> 
+    </div>
+  </section>
 
-      <div class="relative z-10 max-w-4xl mx-auto p-6 md:p-12 hero-content text-center text-white">
-        <p class="text-lg uppercase tracking-widest font-semibold text-custom-highlight mb-3">Fair & Look Interior</p>
-        <h2 class="text-4xl md:text-6xl font-extrabold mb-5 leading-tight">
-          Interior Design Made <span class="text-custom-highlight">Transparent</span> and Beautiful
-        </h2>
-        <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
-          We combine artistic creativity with honest pricing to bring your dream space to life, from consultation to completion.
+  <!-- Projects Section (present and intact) -->
+  <section id="projects" class="py-20 fade-section bg-custom-light-bg">
+    <div class="max-w-7xl mx-auto px-4">
+      <h3 class="text-4xl font-serif text-center font-bold mb-3 text-custom-dark">Our Portfolio</h3>
+      <p class="text-center text-gray-500 mb-14 text-lg">Work across kitchens, living spaces, and ceilings.</p>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <div class="proj group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+          <div class="overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1618220179428-22790b18529c?auto=format&fit=crop&w=800&q=80" alt="Modern Kitchen Design" class="w-full h-64 object-cover" loading="lazy">
+          </div>
+          <div class="p-6 pt-0">
+            <h4 class="font-semibold text-2xl text-custom-dark mb-1 group-hover:text-custom-pink transition-colors">Modern Kitchen</h4>
+            <p class="text-base text-gray-500">Sleek, functional design.</p>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="proj group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+          <div class="overflow-hidden mb-4">
+            <img src="https://images.unsplash.com/photo-1595526114035-0e9589bfa5b9?auto=format&fit=crop&w=800&q=80" alt="Cozy Living Room" class="w-full h-64 object-cover" loading="lazy">
+          </div>
+          <div class="p-6 pt-0">
+            <h4 class="font-semibold text-2xl text-custom-dark mb-1 group-hover:text-custom-pink transition-colors">Cozy Living Room</h4>
+            <p class="text-base text-gray-500">Warm tones, comfortable seating.</p>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="proj group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
+          <div class="overflow-hidden mb-4">
+            <img src="https://lnmm6f7rkaor6luk.public.blob.vercel-storage.com/Office%20Conf%20room.jpg" alt="Office" class="w-full h-64 object-cover" loading="lazy">
+          </div>
+          <div class="p-6 pt-0">
+            <h4 class="font-semibold text-2xl text-custom-dark mb-1 group-hover:text-custom-pink transition-colors">Office</h4>
+            <p class="text-base text-gray-500">Elegance in every corner of your workspace.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 fade-section bg-white border-t border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h3 class="text-base uppercase tracking-widest font-semibold text-custom-pink mb-3">Our Core Promise</h3>
+        <h4 class="text-4xl font-extrabold mb-6 text-custom-dark">Why Choose Fair & Look?</h4>
+        <p class="text-lg leading-relaxed text-gray-600 mb-8">
+          At <b class="text-custom-dark">Fair & Look Interior</b>, we cut through the confusion of home design. We specialize in residential spaces, offering sophisticated designs backed by our commitment to transparent costing and quality delivery.
         </p>
-        
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-5 hero-buttons">
-            <a href="#contact-form" class="w-full sm:w-72 py-4 rounded-full bg-custom-pink text-white text-lg font-bold uppercase tracking-wider shadow-xl hover:bg-custom-pink-hover transition-all duration-300 transform hover:scale-[1.02]">
-                Get a Free Quote
-            </a>
-            <a href="#projects" class="w-full sm:w-72 py-4 rounded-full border-2 border-white/40 text-white text-lg font-medium tracking-wider hover:bg-white/10 transition-colors duration-300">
-                View Portfolio
-            </a>
+        <ul class="space-y-3">
+          <li class="flex items-center text-lg font-medium text-gray-700"><i class="fas fa-check-circle text-custom-pink mr-3"></i> Honest, up-front pricing.</li>
+          <li class="flex items-center text-lg font-medium text-gray-700"><i class="fas fa-check-circle text-custom-pink mr-3"></i> Custom designs reflecting your personality.</li>
+          <li class="flex items-center text-lg font-medium text-gray-700"><i class="fas fa-check-circle text-custom-pink mr-3"></i> End-to-end project management.</li>
+        </ul>
+      </div>
+
+      <div class="hidden md:block">
+        <img src="https://images.unsplash.com/photo-1588854337233-a8c6607e0b5b?q=80&w=1974&auto=format&fit=crop" alt="Interior designer" class="rounded-xl shadow-2xl w-full h-96 object-cover border border-gray-100">
+      </div>
+    </div>
+  </section>
+
+  <!-- WhatsApp Contact Form -->
+  <section id="contact-form" class="py-20 fade-section bg-custom-light-bg text-custom-dark">
+    <div class="max-w-md mx-auto p-8 bg-white rounded-xl shadow-2xl border border-gray-200">
+      <div class="flex justify-between items-center mb-6 border-b border-gray-200 pb-4">
+        <h3 class="text-3xl font-extrabold text-gray-900">Designs for Every Budget</h3>
+        <div class="w-12 h-12 rounded-full border-4 border-gray-300 flex items-center justify-center text-custom-pink font-bold text-sm bg-gray-50" style="background: conic-gradient(#e0e0e0 100%);">
+          <span>HI!</span>
         </div>
       </div>
-      
-      <a href="https://wa.me/9083578093" target="_blank" class="absolute right-6 bottom-6 z-30 bg-white p-3 rounded-full shadow-2xl transition-transform hover:scale-105">
-          <i class="fab fa-whatsapp text-4xl text-[#25D366]"></i>
-      </a>
-      
-    </section>
 
-    <section id="projects" class="py-20 fade-section bg-custom-light-bg">
-      <div class="max-w-7xl mx-auto px-4">
-        <h3 class="text-4xl font-serif text-center font-bold mb-3 text-custom-dark">Our Portfolio</h3>
-        <p class="text-center text-gray-500 mb-14 text-lg">Browse our recent work in kitchens, living spaces, and false ceilings.</p>
-
-        <div class="grid md:grid-cols-3 gap-8">
-          
-          <div class="proj group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
-            <div class="overflow-hidden mb-4">
-                <img src="https://images.unsplash.com/photo-1618220179428-22790b18529c?auto=format&fit=crop&w=800&q=80" alt="Modern Kitchen Design" class="w-full h-64 object-cover" loading="lazy">
-            </div>
-            <div class="p-6 pt-0">
-                <h4 class="font-semibold text-2xl text-custom-dark mb-1 group-hover:text-custom-pink transition-colors">Modern Kitchen</h4>
-                <p class="text-base text-gray-500">Sleek lines and functional design tailored for modern living.</p>
-            </div>
-          </div>
-          
-          <div class="proj group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
-            <div class="overflow-hidden mb-4">
-              <img src="https://images.unsplash.com/photo-1595526114035-0e9589bfa5b9?auto=format&fit=crop&w=800&q=80" alt="Cozy Living Room Interior" class="w-full h-64 object-cover" loading="lazy">
-            </div>
-            <div class="p-6 pt-0">
-                <h4 class="font-semibold text-2xl text-custom-dark mb-1 group-hover:text-custom-pink transition-colors">Cozy Living Room</h4>
-                <p class="text-base text-gray-500">Warm tones, rich textures, and comfortable seating for relaxation.</p>
-            </div>
-          </div>
-          
-          <div class="proj group bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100">
-            <div class="overflow-hidden mb-4">
-              <img src="https://images.unsplash.com/photo-1595526114312-7db8c8e9c4c0?auto=format&fit=crop&w=800&q=80" alt="False Ceiling Design" class="w-full h-64 object-cover" loading="lazy">
-            </div>
-            <div class="p-6 pt-0">
-                <h4 class="font-semibold text-2xl text-custom-dark mb-1 group-hover:text-custom-pink transition-colors">False Ceiling Design</h4>
-                <p class="text-base text-gray-500">Structured elegance with integrated ambient and mood lighting.</p>
-            </div>
-          </div>
-          
+      <form onsubmit="openWhatsApp(event)" class="space-y-6">
+        <div>
+          <label for="name" class="block text-sm font-semibold text-gray-600 mb-1">Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your full name"
+                 class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-custom-pink focus:border-custom-pink shadow-inner placeholder-gray-400" required>
         </div>
-      </div>
-    </section>
-    
-    <section id="about" class="py-20 fade-section bg-white border-t border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-            
-            <div>
-                <h3 class="text-base uppercase tracking-widest font-semibold text-custom-pink mb-3">Our Core Promise</h3>
-                <h4 class="text-4xl font-extrabold mb-6 text-custom-dark">Why Choose Fair & Look?</h4>
-                <p class="text-lg leading-relaxed text-gray-600 mb-8">
-                  At <b class="text-custom-dark">Fair & Look Interior</b>, we cut through the confusion of home design. We specialize in residential spaces, offering sophisticated designs backed by our commitment to transparent costing and quality delivery.
-                </p>
-                <ul class="space-y-3">
-                    <li class="flex items-center text-lg font-medium text-gray-700"><i class="fas fa-check-circle text-custom-pink mr-3"></i> Honest, up-front pricing.</li>
-                    <li class="flex items-center text-lg font-medium text-gray-700"><i class="fas fa-check-circle text-custom-pink mr-3"></i> Custom designs reflecting your personality.</li>
-                    <li class="flex items-center text-lg font-medium text-gray-700"><i class="fas fa-check-circle text-custom-pink mr-3"></i> End-to-end project management.</li>
-                </ul>
+
+        <div>
+          <label for="phone" class="block text-sm font-semibold text-gray-600 mb-1">Phone number</label>
+          <div class="relative rounded-lg shadow-inner">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pr-3 border-r border-gray-300 bg-gray-50 rounded-l-lg">
+              <span class="text-lg">🇮🇳</span>
             </div>
-            
-            <div class="hidden md:block">
-                <img src="https://images.unsplash.com/photo-1588854337233-a8c6607e0b5b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Interior designer working with blueprints" class="rounded-xl shadow-2xl w-full h-96 object-cover border border-gray-100">
-            </div>
+            <input type="tel" id="phone" name="phone" maxlength="10" minlength="10" pattern="[0-9]{10}" placeholder="10-digit number"
+                   class="block w-full pl-16 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-custom-pink focus:border-custom-pink placeholder-gray-400" required>
+          </div>
         </div>
-    </section>
 
-    <section id="contact-form" class="py-20 fade-section bg-custom-light-bg text-custom-dark">
-        <div class="max-w-md mx-auto p-8 bg-white rounded-xl shadow-2xl border border-gray-200">
-            <div class="flex justify-between items-center mb-6 border-b border-gray-200 pb-4">
-                <h3 class="text-3xl font-extrabold text-gray-900">Designs for Every Budget</h3>
-                <div class="w-12 h-12 rounded-full border-4 border-gray-300 flex items-center justify-center text-custom-pink font-bold text-sm bg-gray-50" style="background: conic-gradient(#e95a63 50%, #e0e0e0 50%);">
-                    <span>1/2</span>
-                </div>
-            </div>
-            
-            <form action="#" method="POST" class="space-y-6">
-                <div>
-                    <label for="name" class="block text-sm font-semibold text-gray-600 mb-1">Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your full name" class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-custom-pink focus:border-custom-pink shadow-inner placeholder-gray-400" required>
-                </div>
-
-                <div>
-                    <label for="phone" class="block text-sm font-semibold text-gray-600 mb-1">Phone number</label>
-                    <div class="relative rounded-lg shadow-inner">
-                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pr-3 border-r border-gray-300 bg-gray-50 rounded-l-lg">
-                            <span class="text-lg">🇮🇳</span>
-                        </div>
-                        <input type="tel" id="phone" name="phone" placeholder="Phone number" class="block w-full pl-16 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-custom-pink focus:border-custom-pink placeholder-gray-400" required>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full py-3 mt-8 rounded-lg bg-custom-pink text-white text-lg font-bold uppercase hover:bg-custom-pink-hover transition-colors duration-300 shadow-lg">
-                    Next Step
-                </button>
-            </form>
+        <div>
+          <label for="message" class="block text-sm font-semibold text-gray-600 mb-1">Your Message</label>
+          <textarea id="message" name="message" rows="4" placeholder="Describe your interior needs..."
+                    class="block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-custom-pink focus:border-custom-pink shadow-inner placeholder-gray-400 resize-none" required></textarea>
         </div>
-    </section>
 
-  </div>
+        <button type="submit" class="w-full py-3 mt-8 rounded-lg bg-custom-pink text-white text-lg font-bold uppercase hover:bg-custom-pink-hover transition-colors duration-300 shadow-lg">
+          Message your budget
+        </button>
+      </form>
+    </div>
+  </section>
 
+  <!-- Footer -->
   <footer class="bg-custom-dark text-gray-400 text-center p-6 border-t border-gray-700">
     <div class="max-w-7xl mx-auto">
-        <p>&copy; 2025 Fair & Look Interior. All Rights Reserved.</p>
-        <p class="text-xs mt-1">Kolkata, India | info@fairandlook.com</p>
+      <p>&copy; 2025 Fair & Look Interior. All Rights Reserved.</p>
+      <p class="text-xs mt-1">Kolkata, India | info@fairandlook.com</p>
     </div>
   </footer>
 
-  <div class="fixed-icons" aria-hidden="false">
-    <a href="tel:9083578093" class="call" aria-label="Call us"><i class="fa-solid fa-phone"></i></a>
-  </div>
-
   <script>
-    // Menu toggle
+    // Mobile menu toggle
     document.getElementById('menuBtn').addEventListener('click', () => {
       document.getElementById('menuDropdown').classList.toggle('show');
     });
 
-    // --- Image Carousel Logic ---
+    // Carousel logic
     const carouselItems = document.querySelectorAll('#carouselBackground .carousel-item');
     let currentImageIndex = 0;
-
     function nextImage() {
-        carouselItems[currentImageIndex].classList.remove('active');
-        currentImageIndex = (currentImageIndex + 1) % carouselItems.length;
-        carouselItems[currentImageIndex].classList.add('active');
+      carouselItems[currentImageIndex].classList.remove('active');
+      currentImageIndex = (currentImageIndex + 1) % carouselItems.length;
+      carouselItems[currentImageIndex].classList.add('active');
     }
-
     if (carouselItems.length > 1) {
-      // Start the carousel immediately
       carouselItems[0].classList.add('active');
-      setInterval(nextImage, 5000); 
+      setInterval(nextImage, 5000);
     }
-    // --- END Carousel Logic ---
 
-    // GSAP scroll animations
+    // GSAP fade animations
     gsap.registerPlugin(ScrollTrigger);
     gsap.utils.toArray('.fade-section').forEach(section => {
       gsap.from(section, {
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 80%',
-        },
+        scrollTrigger: { trigger: section, start: 'top 80%' },
         opacity: 0,
         y: 50,
         duration: 1,
@@ -318,9 +289,22 @@
       });
     });
 
-    // Respect reduced motion
-    const mm = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mm.matches) { gsap.globalTimeline.timeScale(0); }
+    // WhatsApp open function (10-digit validation)
+    function openWhatsApp(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const message = document.getElementById("message").value.trim();
+      const phoneRegex = /^[0-9]{10}$/;
+
+      if (!name) { alert("Please enter your name."); return; }
+      if (!phoneRegex.test(phone)) { alert("Please enter a valid 10-digit phone number."); return; }
+      if (!message) { alert("Please enter your message."); return; }
+
+      const encodedMessage = encodeURIComponent(`Hello Fair & Look Interior,\nI'm ${name} (+91${phone}).\n\n${message}`);
+      const whatsappUrl = `https://wa.me/919830603029?text=${encodedMessage}`;
+      window.open(whatsappUrl, "_blank");
+    }
   </script>
 </body>
 </html>
